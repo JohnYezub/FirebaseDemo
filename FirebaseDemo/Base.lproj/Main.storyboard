@@ -7,11 +7,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FirebaseDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -26,8 +26,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7YS-Yw-ojU"/>
-                                    <segue destination="AUh-hp-6uT" kind="show" identifier="taskSegue" id="d9i-jH-etd"/>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QSi-Sm-zgc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mv3-Jv-bQZ">
@@ -36,7 +35,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N5t-Y9-5SI"/>
+                                    <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DMf-tz-xzA"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eqc-Ru-9O2">
@@ -82,9 +81,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="WRZ-5X-flU" id="UyU-qu-e59"/>
-                        <outlet property="passwordTextField" destination="eqc-Ru-9O2" id="PmF-YF-Fbo"/>
-                        <outlet property="warningText" destination="E3u-LS-JRp" id="Bmk-aT-4yO"/>
+                        <outlet property="emailTextField" destination="WRZ-5X-flU" id="TBS-Sc-NKs"/>
+                        <outlet property="passwordTextField" destination="eqc-Ru-9O2" id="pJv-mu-PTD"/>
+                        <outlet property="warnText" destination="E3u-LS-JRp" id="GkE-CZ-e9D"/>
+                        <segue destination="AUh-hp-6uT" kind="show" identifier="tasksSegue" id="lxs-cS-1ka"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
