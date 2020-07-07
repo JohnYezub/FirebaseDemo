@@ -16,7 +16,9 @@ class TasksViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func addTask(_ sender: Any) {
+    }
+    
     /*
     // MARK: - Navigation
 
