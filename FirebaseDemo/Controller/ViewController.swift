@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var warnText: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,16 @@ class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardDidHideNotification, object: nil)
+        ref = Database.database().reference(withPath: "users")
+        Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+            if user != nil {
+                self?.performSegue(withIdentifier: "tasksSegue", sender: nil)
+            }
+        }
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
     }
     @objc func showKeyboard(notification: Notification){
@@ -35,7 +46,7 @@ class ViewController: UIViewController {
     
     func displayWarningLabel(withText text: String) {
         warnText.text = text
-        UIView.animate(withDuration: 3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
             self.warnText.alpha = 1
         }) {  [weak self]  (comlete) in
             self?.warnText.alpha = 0
@@ -52,6 +63,8 @@ class ViewController: UIViewController {
             }
             if result != nil {
                 self?.performSegue(withIdentifier: "tasksSegue", sender: nil)
+                self?.emailTextField.text = ""
+                self?.passwordTextField.text = ""
                 return
             }
             self?.displayWarningLabel(withText: "No user exist")
@@ -60,14 +73,15 @@ class ViewController: UIViewController {
     
     @IBAction func register(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
-        displayWarningLabel(withText: "Info is incorrect")
-        return }
+            displayWarningLabel(withText: "Info is incorrect")
+            return }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-            if error == nil {
-                if result != nil {
-                    self?.performSegue(withIdentifier: "tasksSegue", sender: nil)
-                }
-            }
+            guard error == nil, result != nil else { print(error!.localizedDescription); return }
+            //self?.performSegue(withIdentifier: "tasksSegue", sender: nil)
+            self?.emailTextField.text = ""
+            self?.passwordTextField.text = ""
+            let userRef = self?.ref.child((result?.user.uid)!)
+            userRef?.setValue(["email": result?.user.email])
         }
     }
     

@@ -95,41 +95,33 @@
         <scene sceneID="0nj-zk-WQS">
             <objects>
                 <viewController id="1zE-pH-2Ar" customClass="TasksViewController" customModule="FirebaseDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="L1y-4A-3b8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nkq-MJ-sXe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gFN-f2-a1E">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
-                                <color key="backgroundColor" red="0.58437782530000004" green="0.84723603729999997" blue="0.96004551650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="828-kk-m9m">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="828-kk-m9m" id="Xnq-ao-BTc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="1zE-pH-2Ar" id="SVR-e2-mFc"/>
-                                    <outlet property="delegate" destination="1zE-pH-2Ar" id="OiV-9Y-NJW"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="gFN-f2-a1E" firstAttribute="top" secondItem="AJd-ub-QjD" secondAttribute="top" id="CFh-Lb-15y"/>
-                            <constraint firstItem="AJd-ub-QjD" firstAttribute="bottom" secondItem="gFN-f2-a1E" secondAttribute="bottom" constant="-34" id="QtS-ZH-a1Q"/>
-                            <constraint firstItem="gFN-f2-a1E" firstAttribute="leading" secondItem="AJd-ub-QjD" secondAttribute="leading" id="R20-Tg-c77"/>
-                            <constraint firstItem="AJd-ub-QjD" firstAttribute="trailing" secondItem="gFN-f2-a1E" secondAttribute="trailing" id="jrv-2P-fM9"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="AJd-ub-QjD"/>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.5209035286" green="0.81120042489999999" blue="0.95024877789999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="gcz-uc-K2C">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gcz-uc-K2C" id="SzW-kB-2od">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1zE-pH-2Ar" id="fVD-5M-j01"/>
+                            <outlet property="delegate" destination="1zE-pH-2Ar" id="OQM-u5-dHF"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" title="Tasks" id="UDN-r0-UlY">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="f8v-PL-0ob">
+                            <connections>
+                                <action selector="signOut:" destination="1zE-pH-2Ar" id="PVh-a1-UXT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ii-9G-O2P">
                             <connections>
                                 <action selector="addTask:" destination="1zE-pH-2Ar" id="oTL-R5-c7Y"/>
