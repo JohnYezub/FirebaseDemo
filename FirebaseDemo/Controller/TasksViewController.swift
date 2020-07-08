@@ -77,17 +77,20 @@ class TasksViewController: UIViewController {
     }
 }
 extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
+        
         cell.backgroundColor = .clear
         cell.textLabel?.textColor = .white
         let task = tasks[indexPath.row]
         cell.textLabel?.text = task.title
         isCompleted(cell, completed: task.completed)
+       
         return cell
     }
     

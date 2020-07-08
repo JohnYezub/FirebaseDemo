@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     
     func displayWarningLabel(withText text: String) {
         warnText.text = text
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 2, delay: 0, options: .curveLinear, animations: {
             self.warnText.alpha = 1
         }) {  [weak self]  (comlete) in
             self?.warnText.alpha = 0
@@ -43,11 +43,11 @@ class ViewController: UIViewController {
     
     @IBAction func login(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
-            displayWarningLabel(withText: "Info is incorrect")
+            displayWarningLabel(withText: "Email or password is incorrect")
             return }
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (result, error) in
             if error != nil {
-                self?.displayWarningLabel(withText: "Error occured"); return
+                self?.displayWarningLabel(withText: "Login failed, try to register"); return
             }
             if result != nil {
                 self?.performSegue(withIdentifier: "tasksSegue", sender: nil)
@@ -67,7 +67,9 @@ class ViewController: UIViewController {
             
         }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-            guard error == nil, result != nil else { print(error!.localizedDescription); return }
+            guard error == nil, result != nil else {
+                self?.displayWarningLabel(withText: "Failed. \(error!.localizedDescription)")
+                return }
             //self?.performSegue(withIdentifier: "tasksSegue", sender: nil)
             self?.emailTextField.text = ""
             self?.passwordTextField.text = ""
