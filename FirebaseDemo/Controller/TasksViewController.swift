@@ -9,7 +9,9 @@
 import UIKit
 import Firebase
 class TasksViewController: UIViewController {
-
+    
+    @IBOutlet var tableView: UITableView!
+    
     var fuser: FUser!
     var ref: DatabaseReference!
     var tasks = Array<Task>()
@@ -19,24 +21,44 @@ class TasksViewController: UIViewController {
         guard let currentUser = Auth.auth().currentUser else {return}
         
         fuser = FUser(user: currentUser)
-        ref = Database.database().reference(withPath: "users").child(fuser.userID).child("tasks")
-        // Do any additional setup after loading the view.
+        ref = Database.database().reference(withPath: "users").child(fuser.userId).child("tasks")
     }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ref.observe(.value) { [weak self](dataSnapshot) in
+            var _tasks = Array<Task>()
+            for item in dataSnapshot.children {
+                let task = Task(snapshot: item as! DataSnapshot)
+                _tasks.append(task)
+            }
+            self?.tasks = _tasks
+            self?.tableView.reloadData()
+        }
+    }
+    
+    
+    
     @IBAction func signOut(_ sender: Any) {
         do {
-        try Auth.auth().signOut()
+            try Auth.auth().signOut()
         } catch {
             print(error.localizedDescription)
         }
         dismiss(animated: true, completion: nil)
     }
     
+    
+    
     @IBAction func addTask(_ sender: Any) {
         let alertController = UIAlertController(title: "Add new Task", message: "Type new task", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
+        
         let save = UIAlertAction(title: "Save", style: .default) { [weak self]_ in
             guard let textField = alertController.textFields?.first, textField.text != "" else {return}
-            let task = Task(title: textField.text!, userID: (self?.fuser.userID)!)
+            let task = Task(title: textField.text!, userId: (self?.fuser.userId)!)
             let taskRef = self?.ref.child(task.title.lowercased())
             taskRef?.setValue(task.convertToDictionary())
             
@@ -47,15 +69,24 @@ class TasksViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ref.removeAllObservers()
+    }
 }
 extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = .clear
+        cell.textLabel?.textColor = .white
+        let taskTitle = tasks[indexPath.row].title
+        cell.textLabel?.text = taskTitle
         return cell
     }
     

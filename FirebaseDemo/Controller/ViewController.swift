@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardDidHideNotification, object: nil)
+        
         ref = Database.database().reference(withPath: "users")
         Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             if user != nil {
@@ -29,19 +30,6 @@ class ViewController: UIViewController {
             }
         }
         
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    @objc func showKeyboard(notification: Notification){
-        guard let userInfo = notification.userInfo else { return }
-        let kbFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height + kbFrameSize.height)
-        (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrameSize.height, right: 0)
-    }
-    @objc func hideKeyboard() {
-        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
     }
     
     func displayWarningLabel(withText text: String) {
@@ -72,9 +60,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func register(_ sender: Any) {
-        guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
+        guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else
+        {
             displayWarningLabel(withText: "Info is incorrect")
-            return }
+            return
+            
+        }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
             guard error == nil, result != nil else { print(error!.localizedDescription); return }
             //self?.performSegue(withIdentifier: "tasksSegue", sender: nil)
@@ -85,4 +76,16 @@ class ViewController: UIViewController {
         }
     }
     
+}
+
+extension ViewController {
+    @objc func showKeyboard(notification: Notification){
+        guard let userInfo = notification.userInfo else { return }
+        let kbFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height + kbFrameSize.height)
+        (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrameSize.height, right: 0)
+    }
+    @objc func hideKeyboard() {
+        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+    }
 }
