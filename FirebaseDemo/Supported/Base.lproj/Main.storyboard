@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FirebaseDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="FirebaseDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="UIScrollView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pm-57-yWm">
-                                <rect key="frame" x="157" y="505" width="100" height="36"/>
+                                <rect key="frame" x="157" y="531" width="100" height="36"/>
                                 <color key="backgroundColor" red="0.60625322297993722" green="0.87606106612762757" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="xzK-ZU-MB5"/>
@@ -35,7 +35,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mv3-Jv-bQZ">
-                                <rect key="frame" x="178.66666666666666" y="551" width="57" height="30"/>
+                                <rect key="frame" x="178.66666666666666" y="577" width="57" height="30"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -65,10 +65,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVy-75-nGO" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="157" y="493" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="9T0-ai-BDy"/>
+                                </constraints>
+                                <state key="normal" title="FB"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.52090352855344124" green="0.81120042486139943" blue="0.95024877789999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="E3u-LS-JRp" firstAttribute="top" secondItem="yLl-83-68V" secondAttribute="bottom" constant="20" id="0MX-Jn-wNd"/>
+                            <constraint firstItem="qVy-75-nGO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1Ub-oF-7yX"/>
                             <constraint firstItem="mv3-Jv-bQZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4FM-3i-Wkh"/>
                             <constraint firstItem="E3u-LS-JRp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9YN-yB-Ch5"/>
                             <constraint firstItem="WRZ-5X-flU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fqq-hi-yg9"/>
@@ -77,16 +85,18 @@
                             <constraint firstItem="eqc-Ru-9O2" firstAttribute="top" secondItem="WRZ-5X-flU" secondAttribute="bottom" constant="10" id="UKR-6O-AaA"/>
                             <constraint firstItem="eqc-Ru-9O2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="W7U-4I-nof"/>
                             <constraint firstItem="WRZ-5X-flU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aBG-7F-MIQ"/>
+                            <constraint firstItem="qVy-75-nGO" firstAttribute="top" secondItem="eqc-Ru-9O2" secondAttribute="bottom" constant="8" id="dAr-2r-3s9"/>
                             <constraint firstItem="WRZ-5X-flU" firstAttribute="top" secondItem="yLl-83-68V" secondAttribute="bottom" constant="50" id="eS0-gQ-yzA"/>
                             <constraint firstItem="mv3-Jv-bQZ" firstAttribute="top" secondItem="3pm-57-yWm" secondAttribute="bottom" constant="10" id="jvr-qw-vi6"/>
                             <constraint firstItem="3pm-57-yWm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t7V-4i-g1c"/>
                             <constraint firstItem="eqc-Ru-9O2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ug2-4T-Xgp"/>
-                            <constraint firstItem="3pm-57-yWm" firstAttribute="top" secondItem="eqc-Ru-9O2" secondAttribute="bottom" constant="20" id="whk-k0-CkF"/>
+                            <constraint firstItem="3pm-57-yWm" firstAttribute="top" secondItem="qVy-75-nGO" secondAttribute="bottom" constant="8" id="uvj-iT-FLA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="WRZ-5X-flU" id="TBS-Sc-NKs"/>
+                        <outlet property="loginButton" destination="qVy-75-nGO" id="ujt-Jh-Tem"/>
                         <outlet property="passwordTextField" destination="eqc-Ru-9O2" id="pJv-mu-PTD"/>
                         <outlet property="warnText" destination="E3u-LS-JRp" id="GkE-CZ-e9D"/>
                         <segue destination="AUh-hp-6uT" kind="show" identifier="tasksSegue" id="lxs-cS-1ka"/>

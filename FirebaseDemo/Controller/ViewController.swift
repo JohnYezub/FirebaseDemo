@@ -7,9 +7,12 @@
 //
 
 import UIKit
-import  Firebase
+import Firebase
+import FBSDKLoginKit
 
 class ViewController: UIViewController {
+
+    @IBOutlet weak var loginButton: FBLoginButton!
     
     @IBOutlet weak var warnText: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
@@ -19,6 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         warnText.alpha = 0
+        loginButton.permissions = ["public_profile", "email"]
+        loginButton.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -90,4 +95,36 @@ extension ViewController {
     @objc func hideKeyboard() {
         (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
     }
+}
+extension ViewController: LoginButtonDelegate {
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        print("Logout...")
+    }
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if error != nil {
+            print(error!)
+            return
+        }
+        guard AccessToken.isCurrentAccessTokenActive else { print("AccessTokenActive inactive. Quit"); return }
+        //openMainVC()
+        
+        fetchFBdata()
+        print("logged in...")
+        dismiss(animated: true)
+    }
+    
+    func fetchFBdata() {
+        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start { (_, user, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            if let userData = user as? [String: Any] {
+                print(userData)
+            }
+        }
+    }
+    
+    
 }

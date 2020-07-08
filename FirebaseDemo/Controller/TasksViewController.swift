@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
+
 class TasksViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
@@ -116,4 +118,19 @@ extension TasksViewController: UITableViewDataSource, UITableViewDelegate {
         cell.accessoryType = completed ? .checkmark : .none
     }
     
+}
+extension TasksViewController {
+    private func checkLogin(){
+        if AccessToken.isCurrentAccessTokenActive {
+            // User is logged in, do work such as go to next view controller.
+            print("ViewController: current access token is active")
+           // fetchFBdata()
+        } else {
+            DispatchQueue.main.async {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginVC = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                self.present(loginVC, animated: true)
+            }
+        }
+    }
 }
