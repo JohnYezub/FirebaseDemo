@@ -6,6 +6,7 @@ Firebase simple project. Setup the ToDo app in TableView style with SignIn/SignU
 
 ### Usage:
 * `MVC`
+* `Layout Constraints`
 * `Firebase Database`
 * `Firebase Email Auth`
 * `Cocoapods`
