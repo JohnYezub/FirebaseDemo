@@ -1,5 +1,5 @@
 # FirebaseDemo
-Firebase simple project. Setup the ToDo app in TableView style with SignIn/SignUP controller
+Firebase simple project. Setup the ToDo app in TableView style with SignIn/SignUp controller
 
 ![FirebaseDemo](./Screenshots.gif "Firebase Demo")
 
@@ -11,7 +11,7 @@ Firebase simple project. Setup the ToDo app in TableView style with SignIn/SignU
 * `Cocoapods`
 * `TableView`
 * `Observer`
-* `AlerController`
+* `AlertController`
 
  
 ### Features: 
