@@ -16,6 +16,7 @@ Firebase simple project. Setup the ToDo app in TableView style with SignIn/SignU
 
  
 ### Features: 
+* support all iPhone models
 * Add, create user in Firebase DB
 * Check and inform in case of bad email input
 * Keyboard appearence will not overlap the login screen
