@@ -9,6 +9,10 @@
 import UIKit
 import  Firebase
 
+import AppCenter
+import AppCenterCrashes
+
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var warnText: UILabel!
@@ -18,6 +22,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MSAppCenter.start("973c0f51-b13b-4766-8923-3c70865e2b17", withServices:[
+          MSCrashes.self
+        ])
+        
         warnText.alpha = 0
         
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardDidShowNotification, object: nil)
