@@ -8,11 +8,24 @@
 
 import UIKit
 import Firebase
+
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
+
+
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        MSAppCenter.start("973c0f51-b13b-4766-8923-3c70865e2b17", withServices:[
+          MSAnalytics.self,
+          MSCrashes.self
+        ])
         FirebaseApp.configure()
         return true
     }
